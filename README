@@ -60,5 +60,9 @@ View HTML file
     sed -i 's/\\n/\n/g' plot.html
     sed -i 's/\\"/"/g' plot.html
   ```
+  There is a helper script that will do this for you:
+  ```
+    ./edit-html.sh plot.html
+  ```
   now navigate to file:///{path to plot.html}
   and you should be able to see a plot.
