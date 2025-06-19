@@ -9,8 +9,9 @@ To start the server:
   ```
 - Run uvicorn server
   ```
-    uvicorn app.main:app --port 8765
+    uvicorn app.main:app --reload --port 8765
   ```
+  the reload flag triggers the server to restart whenever the code is edited, good if you are hacking around :)
 
 To generate HTML file:
 - Using cURL:
