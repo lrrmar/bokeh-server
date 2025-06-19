@@ -1,0 +1,64 @@
+A simple bokeh server using FastAPI to return a HTML file containing and interactive time series plot.
+
+To start the server:
+- Create a virtual env using the requirements file
+  ```
+    python -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+  ```
+- Run uvicorn server
+  ```
+    uvicorn app.main:app --port 8765
+  ```
+
+To generate HTML file:
+- Using cURL:
+  ```
+    curl -X 'POST' \
+    'http://localhost:8765/plot' \
+    -H 'accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{
+      "times": [
+        "2025-06-10T00:00:00",
+        "2025-06-10T01:00:00"
+      ],
+      "data": [
+        "10", "12"
+      ],
+      "variable": "temperature",
+      "units": "deg C"
+      }' > plot.html
+    ```
+- Using docs page:
+  Navigate to localhost:8765/docs
+  Open `/plot` menu
+  Press 'try it out'
+  Paste the following to the request body:
+  ```
+    {
+      "times": [
+        "2025-06-10T00:00:00",
+        "2025-06-10T01:00:00"
+      ],
+      "data": [
+        "10", "12"
+      ],
+      "variable": "temperature",
+      "units": "deg C"
+    }
+  ```
+  Press execute
+  Copy and paste output to file, e.g. plot.html
+
+View HTML file
+  Since the HTML file is sent as a JSON string, some editing needs doing so that you can open it in your browser, namely removing '"' from start and end of file, replacing the strings '\n' with actual new line chars and replacing '\"' with '"'.
+  ```
+    sed -i '1s/^"//g' plot.html 
+    sed -i '$s/"$//g' plot.html 
+    sed -i 's/\\n/\n/g' plot.html
+    sed -i 's/\\"/"/g' plot.html
+  ```
+  now navigate to file:///{path to plot.html}
+  and you should be able to see a plot.

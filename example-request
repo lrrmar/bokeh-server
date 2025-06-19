@@ -1,0 +1,15 @@
+curl -X 'POST' \
+  'http://localhost:8765/plot' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "times": [
+    "2025-06-10T00:00:00",
+    "2025-06-10T01:00:00"
+  ],
+  "data": [
+    "10", "12"
+  ],
+  "variable": "temperature",
+  "units": "deg C"
+}'

@@ -3,7 +3,7 @@ from typing import Annotated
 import json
 import datetime as dt
 from bokeh.plotting import figure
-from bokeh.embed import json_item
+from bokeh.embed import json_item, file_html
 from bokeh.io import curdoc
 from fastapi.middleware.cors import CORSMiddleware
 import numpy as np
@@ -40,8 +40,8 @@ def get_plot(args: TimeseriesArgs):
     p.scatter(x, y)
     p.xaxis.axis_label = 'time'
     p.yaxis.axis_label = y_axis_label
-    j = json_item(p, 'bk-plot', theme='dark_minimal')
-    return j
+    file = file_html(p)
+    return file
 
 
 
